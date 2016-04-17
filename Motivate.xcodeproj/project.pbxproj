@@ -7,13 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4F4034EB1CBF3F5D0014AB48 /* NewHabitVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4034EA1CBF3F5C0014AB48 /* NewHabitVC.swift */; };
+		4F4034ED1CBF46CF0014AB48 /* HabitItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4034EC1CBF46CF0014AB48 /* HabitItem.swift */; };
+		4F4034EF1CBFE0CE0014AB48 /* HTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4034EE1CBFE0CE0014AB48 /* HTableVC.swift */; };
 		4F4F18571CB1F997000423E1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4F18561CB1F997000423E1 /* AppDelegate.swift */; };
 		4F4F18591CB1F997000423E1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4F18581CB1F997000423E1 /* ViewController.swift */; };
-		4F4F185C1CB1F997000423E1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F4F185A1CB1F997000423E1 /* Main.storyboard */; };
-		4F4F185F1CB1F997000423E1 /* Motivate.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4F4F185D1CB1F997000423E1 /* Motivate.xcdatamodeld */; };
 		4F4F18611CB1F997000423E1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4F4F18601CB1F997000423E1 /* Assets.xcassets */; };
 		4F4F18641CB1F997000423E1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F4F18621CB1F997000423E1 /* LaunchScreen.storyboard */; };
 		4F4F186F1CB1F997000423E1 /* MotivateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4F186E1CB1F997000423E1 /* MotivateTests.swift */; };
+		4F4F187A1CB1F9BD000423E1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F4F18791CB1F9BD000423E1 /* Main.storyboard */; };
+		4F4F187C1CB1F9F0000423E1 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4F187B1CB1F9F0000423E1 /* HomeVC.swift */; };
+		4F4F187E1CB1FA00000423E1 /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4F187D1CB1FA00000423E1 /* SignUpVC.swift */; };
+		4F4F18801CB1FA13000423E1 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4F187F1CB1FA13000423E1 /* LoginVC.swift */; };
+		4F9177B11CB2173B00B43230 /* RandomQuoteVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9177B01CB2173B00B43230 /* RandomQuoteVC.swift */; };
+		4F9177B31CB2AE9400B43230 /* GoalItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9177B21CB2AE9400B43230 /* GoalItem.swift */; };
+		4F9177B51CB2AF0D00B43230 /* AddGoalVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9177B41CB2AF0D00B43230 /* AddGoalVC.swift */; };
+		4F9177B71CB2B07C00B43230 /* DataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9177B61CB2B07C00B43230 /* DataStorage.swift */; };
+		4F9177B91CB3293800B43230 /* GTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9177B81CB3293800B43230 /* GTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -27,17 +37,27 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4F4034EA1CBF3F5C0014AB48 /* NewHabitVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewHabitVC.swift; sourceTree = "<group>"; };
+		4F4034EC1CBF46CF0014AB48 /* HabitItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HabitItem.swift; sourceTree = "<group>"; };
+		4F4034EE1CBFE0CE0014AB48 /* HTableVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTableVC.swift; sourceTree = "<group>"; };
 		4F4F18531CB1F997000423E1 /* Motivate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Motivate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F4F18561CB1F997000423E1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4F4F18581CB1F997000423E1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		4F4F185B1CB1F997000423E1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		4F4F185E1CB1F997000423E1 /* Motivate.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Motivate.xcdatamodel; sourceTree = "<group>"; };
 		4F4F18601CB1F997000423E1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4F4F18631CB1F997000423E1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4F4F18651CB1F997000423E1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4F4F186A1CB1F997000423E1 /* MotivateTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MotivateTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F4F186E1CB1F997000423E1 /* MotivateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotivateTests.swift; sourceTree = "<group>"; };
 		4F4F18701CB1F997000423E1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4F4F18791CB1F9BD000423E1 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		4F4F187B1CB1F9F0000423E1 /* HomeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
+		4F4F187D1CB1FA00000423E1 /* SignUpVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpVC.swift; sourceTree = "<group>"; };
+		4F4F187F1CB1FA13000423E1 /* LoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
+		4F9177B01CB2173B00B43230 /* RandomQuoteVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RandomQuoteVC.swift; sourceTree = "<group>"; };
+		4F9177B21CB2AE9400B43230 /* GoalItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoalItem.swift; sourceTree = "<group>"; };
+		4F9177B41CB2AF0D00B43230 /* AddGoalVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddGoalVC.swift; sourceTree = "<group>"; };
+		4F9177B61CB2B07C00B43230 /* DataStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataStorage.swift; sourceTree = "<group>"; };
+		4F9177B81CB3293800B43230 /* GTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,11 +101,21 @@
 			children = (
 				4F4F18561CB1F997000423E1 /* AppDelegate.swift */,
 				4F4F18581CB1F997000423E1 /* ViewController.swift */,
-				4F4F185A1CB1F997000423E1 /* Main.storyboard */,
 				4F4F18601CB1F997000423E1 /* Assets.xcassets */,
+				4F4F18791CB1F9BD000423E1 /* Main.storyboard */,
+				4F4034EA1CBF3F5C0014AB48 /* NewHabitVC.swift */,
+				4F4034EC1CBF46CF0014AB48 /* HabitItem.swift */,
 				4F4F18621CB1F997000423E1 /* LaunchScreen.storyboard */,
+				4F4F187B1CB1F9F0000423E1 /* HomeVC.swift */,
+				4F4F187D1CB1FA00000423E1 /* SignUpVC.swift */,
+				4F4F187F1CB1FA13000423E1 /* LoginVC.swift */,
 				4F4F18651CB1F997000423E1 /* Info.plist */,
-				4F4F185D1CB1F997000423E1 /* Motivate.xcdatamodeld */,
+				4F9177B01CB2173B00B43230 /* RandomQuoteVC.swift */,
+				4F9177B21CB2AE9400B43230 /* GoalItem.swift */,
+				4F9177B41CB2AF0D00B43230 /* AddGoalVC.swift */,
+				4F9177B61CB2B07C00B43230 /* DataStorage.swift */,
+				4F9177B81CB3293800B43230 /* GTableViewController.swift */,
+				4F4034EE1CBFE0CE0014AB48 /* HTableVC.swift */,
 			);
 			path = Motivate;
 			sourceTree = "<group>";
@@ -184,7 +214,7 @@
 			files = (
 				4F4F18641CB1F997000423E1 /* LaunchScreen.storyboard in Resources */,
 				4F4F18611CB1F997000423E1 /* Assets.xcassets in Resources */,
-				4F4F185C1CB1F997000423E1 /* Main.storyboard in Resources */,
+				4F4F187A1CB1F9BD000423E1 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -202,8 +232,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4F4F185F1CB1F997000423E1 /* Motivate.xcdatamodeld in Sources */,
+				4F4F187C1CB1F9F0000423E1 /* HomeVC.swift in Sources */,
+				4F4F18801CB1FA13000423E1 /* LoginVC.swift in Sources */,
+				4F9177B51CB2AF0D00B43230 /* AddGoalVC.swift in Sources */,
+				4F9177B31CB2AE9400B43230 /* GoalItem.swift in Sources */,
+				4F9177B91CB3293800B43230 /* GTableViewController.swift in Sources */,
+				4F4034ED1CBF46CF0014AB48 /* HabitItem.swift in Sources */,
+				4F4034EB1CBF3F5D0014AB48 /* NewHabitVC.swift in Sources */,
 				4F4F18591CB1F997000423E1 /* ViewController.swift in Sources */,
+				4F4034EF1CBFE0CE0014AB48 /* HTableVC.swift in Sources */,
+				4F9177B11CB2173B00B43230 /* RandomQuoteVC.swift in Sources */,
+				4F9177B71CB2B07C00B43230 /* DataStorage.swift in Sources */,
+				4F4F187E1CB1FA00000423E1 /* SignUpVC.swift in Sources */,
 				4F4F18571CB1F997000423E1 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -227,14 +267,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		4F4F185A1CB1F997000423E1 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				4F4F185B1CB1F997000423E1 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		4F4F18621CB1F997000423E1 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -396,6 +428,7 @@
 				4F4F18751CB1F997000423E1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4F4F18761CB1F997000423E1 /* Build configuration list for PBXNativeTarget "MotivateTests" */ = {
 			isa = XCConfigurationList;
@@ -404,21 +437,9 @@
 				4F4F18781CB1F997000423E1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		4F4F185D1CB1F997000423E1 /* Motivate.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				4F4F185E1CB1F997000423E1 /* Motivate.xcdatamodel */,
-			);
-			currentVersion = 4F4F185E1CB1F997000423E1 /* Motivate.xcdatamodel */;
-			path = Motivate.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 4F4F184B1CB1F997000423E1 /* Project object */;
 }
