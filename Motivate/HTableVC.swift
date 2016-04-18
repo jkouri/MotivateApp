@@ -19,7 +19,18 @@ class HTableVC: UITableViewController {
         super.viewDidLoad()
         self.tableView.delegate = self
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "reloadTableData:", name: "reload", object: nil)
+    
+        let documentsPath : AnyObject = NSSearchPathForDirectoriesInDomains(.DocumentDirectory,.UserDomainMask,true)[0]
+        let destinationPath:NSString = documentsPath.stringByAppendingString("/habit_list.db")
+        
+        let tempList = NSKeyedUnarchiver.unarchiveObjectWithFile(destinationPath as String)
+        
+        if ((tempList) != nil){
+            DataStorage.sharedInstance.habitList = tempList as! [HabitItem]
+        }
+
     }
+    
     /*        if NSUserDefaults.standardUserDefaults().objectForKey("list") != nil {
      reminderlist = NSUserDefaults.standardUserDefaults().objectForKey("list") as! [ReminderItem] */
     
@@ -55,10 +66,8 @@ class HTableVC: UITableViewController {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("HabitID", forIndexPath: indexPath)
+    
         
-        if let data = NSUserDefaults.standardUserDefaults().objectForKey("habits") as? NSData {
-            let habits = NSKeyedUnarchiver.unarchiveObjectWithData(data)
-        }
         
         let list = DataStorage.sharedInstance.habitList
         cell.textLabel?.text = list[indexPath.row].habit

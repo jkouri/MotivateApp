@@ -26,15 +26,6 @@ class NewHabitVC: UIViewController, UITextFieldDelegate, UITextViewDelegate{
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        
-        //set default value = "21 days: for picker
-
-        
-       // let currentDate = NSDate()
-        //currentTime.minimumDate = currentDate
-        //myDatePicker.date = currentDate //7 - defaults
-
         
         if(self.habitName != "" || self.habitDay != nil) {
             self.habitName.text = self.currentHabit
@@ -63,12 +54,14 @@ class NewHabitVC: UIViewController, UITextFieldDelegate, UITextViewDelegate{
         d = NSDate(timeIntervalSinceReferenceDate: timeInterval)
 
         
-        
         let x = HabitItem(habit: habitName.text!, time: d, day: 0, dateMade: NSDate())
         DataStorage.sharedInstance.addHabit(x!)
         
-        let data = NSKeyedArchiver.archivedDataWithRootObject(DataStorage.sharedInstance.habitList)
-        NSUserDefaults.standardUserDefaults().setObject(data, forKey: "habits")
+        
+        let documentsPath : AnyObject = NSSearchPathForDirectoriesInDomains(.DocumentDirectory,.UserDomainMask,true)[0]
+        let destinationPath:NSString = documentsPath.stringByAppendingString("/habit_list.db")
+        
+        NSKeyedArchiver.archiveRootObject(DataStorage.sharedInstance.habitList, toFile: destinationPath as String)
         
         NSUserDefaults.standardUserDefaults().setObject(habit, forKey: "list")
         habitName.text=""

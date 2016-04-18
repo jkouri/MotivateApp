@@ -17,6 +17,7 @@ var  timer = NSTimer()
 class AddGoalVC: UIViewController, UITextFieldDelegate, UITextViewDelegate, CLLocationManagerDelegate {
     //connect button add reminder
     @IBOutlet weak var goalLocation: UITextField!
+   
     //communictae with same datastroage of tableview controller
     
     let locationManager = CLLocationManager()
@@ -31,15 +32,16 @@ class AddGoalVC: UIViewController, UITextFieldDelegate, UITextViewDelegate, CLLo
     var currentGoal: String = ""
     var currentDesc: String = ""
     var currentDueDate: NSDate? = nil
+    var currentLocation: CLPlacemark? = nil
    // var currentAlertC: UIAlertController? = nil
   
-    
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Handle the text field’s user input through delegate callbacks.
         goalname.delegate = self
+    
         
         duedate.minimumDate = NSDate()
         let timeInterval = floor(duedate.minimumDate!.timeIntervalSinceReferenceDate/60.0)*60.0
@@ -81,15 +83,19 @@ class AddGoalVC: UIViewController, UITextFieldDelegate, UITextViewDelegate, CLLo
             
             if placemarks!.count > 0
             {
-                let pm = placemarks![0] as! CLPlacemark
-                self.displayLocationInfo(pm)
+                self.currentLocation = placemarks![0] as CLPlacemark
             }
         })
     }
     
+    @IBAction func useCurrentLocation(sender: AnyObject) {
+        displayLocationInfo(self.currentLocation!)
+    }
+    
     func displayLocationInfo(placemark: CLPlacemark){
         self.locationManager.stopUpdatingLocation()
-        goalLocation.text = placemark.locality! + " " + placemark.postalCode! + " " + placemark.administrativeArea! + " " + placemark.country!
+        goalLocation.text = placemark.locality! + ", "  + placemark.administrativeArea! + " " + placemark.postalCode! + " " + placemark.country!
+        
        /* print(placemark.locality)
         print(placemark.postalCode)
         print(placemark.administrativeArea)
@@ -189,6 +195,14 @@ class AddGoalVC: UIViewController, UITextFieldDelegate, UITextViewDelegate, CLLo
         
         let x = GoalItem(goal: goalname.text!,duedate: d, desc: goaldesc.text!)
         DataStorage.sharedInstance.addGoal(x!)
+        
+        
+        
+        let documentsPath : AnyObject = NSSearchPathForDirectoriesInDomains(.DocumentDirectory,.UserDomainMask,true)[0]
+        let destinationPath:NSString = documentsPath.stringByAppendingString("/goal_list.db")
+        
+        NSKeyedArchiver.archiveRootObject(DataStorage.sharedInstance.goalList, toFile: destinationPath as String)
+
         
         NSUserDefaults.standardUserDefaults().setObject(goal, forKey: "list")
         goalname.text=""

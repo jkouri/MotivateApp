@@ -596,6 +596,15 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <datePicker contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="7SB-ap-AWq">
+                                <rect key="frame" x="61" y="318" width="461" height="117"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="117" id="IWr-7P-ctC"/>
+                                </constraints>
+                                <date key="date" timeIntervalSinceReferenceDate="481060701.19913602">
+                                    <!--2016-03-30 19:58:21 +0000-->
+                                </date>
+                            </datePicker>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Goal:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nN5-lx-O6k">
                                 <rect key="frame" x="39" y="74" width="40" height="20"/>
                                 <constraints>
@@ -628,15 +637,16 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <datePicker contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="7SB-ap-AWq">
-                                <rect key="frame" x="61" y="318" width="461" height="117"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bae-aW-aMj">
+                                <rect key="frame" x="367" y="457" width="155" height="30"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="117" id="IWr-7P-ctC"/>
+                                    <constraint firstAttribute="width" constant="155" id="jxs-dh-EWF"/>
                                 </constraints>
-                                <date key="date" timeIntervalSinceReferenceDate="481060701.19913602">
-                                    <!--2016-03-30 19:58:21 +0000-->
-                                </date>
-                            </datePicker>
+                                <state key="normal" title="Use Current Location"/>
+                                <connections>
+                                    <action selector="useCurrentLocation:" destination="wAz-od-iR8" eventType="touchUpInside" id="487-5m-It9"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -646,6 +656,7 @@
                             <constraint firstItem="W5a-qf-ePq" firstAttribute="top" secondItem="7SB-ap-AWq" secondAttribute="bottom" constant="17" id="CJP-T7-f0O"/>
                             <constraint firstItem="Cug-GL-tdO" firstAttribute="top" secondItem="Mt7-yx-toT" secondAttribute="bottom" constant="11" id="DsB-gA-92P"/>
                             <constraint firstItem="nN5-lx-O6k" firstAttribute="top" secondItem="rUp-fm-ECp" secondAttribute="bottom" constant="10" id="FqV-Yy-oxe"/>
+                            <constraint firstItem="bae-aW-aMj" firstAttribute="top" secondItem="7SB-ap-AWq" secondAttribute="bottom" constant="22" id="Fsw-Fh-qpj"/>
                             <constraint firstItem="PnF-eS-q6x" firstAttribute="top" secondItem="rUp-fm-ECp" secondAttribute="bottom" constant="39" id="HPK-Ot-76W"/>
                             <constraint firstItem="7SB-ap-AWq" firstAttribute="leading" secondItem="Npd-97-oE1" secondAttribute="leadingMargin" constant="41" id="Irb-b3-WJh"/>
                             <constraint firstItem="nN5-lx-O6k" firstAttribute="leading" secondItem="Npd-97-oE1" secondAttribute="leadingMargin" constant="19" id="PBl-QZ-y7Q"/>
@@ -657,6 +668,7 @@
                             <constraint firstAttribute="trailingMargin" secondItem="7SB-ap-AWq" secondAttribute="trailing" constant="58" id="cJd-mm-QLT"/>
                             <constraint firstItem="Mt7-yx-toT" firstAttribute="top" secondItem="KUF-jT-NZb" secondAttribute="bottom" constant="25" id="eDt-1N-gxv"/>
                             <constraint firstAttribute="trailingMargin" secondItem="PnF-eS-q6x" secondAttribute="trailing" constant="58" id="ex6-Hd-ku1"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="bae-aW-aMj" secondAttribute="trailing" constant="58" id="f30-JO-Fg4"/>
                             <constraint firstItem="Cug-GL-tdO" firstAttribute="leading" secondItem="Npd-97-oE1" secondAttribute="leadingMargin" constant="19" id="fj0-6w-BN6"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Bpy-t7-NcG" secondAttribute="trailing" constant="58" id="meA-a1-tbp"/>
                             <constraint firstItem="Mt7-yx-toT" firstAttribute="leading" secondItem="Npd-97-oE1" secondAttribute="leadingMargin" constant="41" id="p0G-JF-dWq"/>
