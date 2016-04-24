@@ -136,6 +136,7 @@ class GTableViewController: UITableViewController  {
             destVC.currentGoal = (currentGoal?.goal)!
             destVC.currentDueDate = currentGoal!.duedate
             destVC.currentDesc = (currentGoal?.desc)!
+            destVC.curLocation = (currentGoal?.location)!
           //  destVC.currentAlertC = (curr?.alertController)
         }
     }

@@ -87,6 +87,7 @@ class HTableVC: UITableViewController {
         
         print(components)
         
+        list[indexPath.row].day = components.day
         let x = list[indexPath.row].day
         let string = String(x)
         cell.detailTextLabel?.text = string

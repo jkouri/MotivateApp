@@ -417,7 +417,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Day " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NPL-Sp-M5X">
-                                <rect key="frame" x="467" y="97" width="74" height="21"/>
+                                <rect key="frame" x="443" y="97" width="74" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
@@ -439,11 +439,11 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Ska-EH-4vg" firstAttribute="leading" secondItem="9wl-79-EPH" secondAttribute="leadingMargin" constant="81" id="0Y2-ms-3a8"/>
                             <constraint firstItem="10x-Gs-C9x" firstAttribute="leading" secondItem="9wl-79-EPH" secondAttribute="leadingMargin" constant="23" id="21i-bA-ICk"/>
-                            <constraint firstItem="Ska-EH-4vg" firstAttribute="centerY" secondItem="9wl-79-EPH" secondAttribute="centerY" id="51v-Jw-8cS"/>
                             <constraint firstAttribute="trailingMargin" secondItem="10x-Gs-C9x" secondAttribute="trailing" constant="22" id="Cwv-nt-cjh"/>
                             <constraint firstItem="10x-Gs-C9x" firstAttribute="top" secondItem="ToT-l7-hsD" secondAttribute="bottom" constant="70" id="E12-Q3-x7G"/>
+                            <constraint firstItem="Ska-EH-4vg" firstAttribute="leading" secondItem="9wl-79-EPH" secondAttribute="leadingMargin" constant="81" id="THQ-XH-I4n"/>
+                            <constraint firstItem="Ska-EH-4vg" firstAttribute="centerY" secondItem="9wl-79-EPH" secondAttribute="centerY" id="pzH-zt-6hq"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="New Habit" id="wGn-3M-QjV">

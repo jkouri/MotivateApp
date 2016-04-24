@@ -17,14 +17,17 @@ class GoalItem: NSObject, NSCoding {
     var goal: String
     var duedate: NSDate
     var desc: String
+    var location: String
     //var alert: Bool
     
     // MARK: Initialization
     
-    init?(goal: String, duedate: NSDate, desc: String) {
+    init?(goal: String, duedate: NSDate, desc: String, location: String) {
         self.goal = goal
         self.duedate = duedate
         self.desc = desc
+        self.location = location
+        
     }
     
     override func isEqual(object: AnyObject?) -> Bool {
@@ -40,13 +43,15 @@ class GoalItem: NSObject, NSCoding {
     required convenience init?(coder decoder: NSCoder) {
         guard let goal = decoder.decodeObjectForKey("goal") as? String,
             let duedate = decoder.decodeObjectForKey("duedate") as? NSDate,
-            let desc = decoder.decodeObjectForKey("desc") as? String
+            let desc = decoder.decodeObjectForKey("desc") as? String,
+            let location = decoder.decodeObjectForKey("location") as? String
             else { return nil }
         
         self.init(
             goal: goal,
             duedate: duedate,
-            desc: desc
+            desc: desc,
+            location: location
         )
     }
     
@@ -54,7 +59,7 @@ class GoalItem: NSObject, NSCoding {
         coder.encodeObject(self.goal, forKey: "goal")
         coder.encodeObject(self.duedate, forKey: "duedate")
         coder.encodeObject(self.desc, forKey: "desc")
-       
+        coder.encodeObject(self.location, forKey: "location")
     }
     
     

@@ -16,23 +16,25 @@ var  timer = NSTimer()
 
 class AddGoalVC: UIViewController, UITextFieldDelegate, UITextViewDelegate, CLLocationManagerDelegate {
     //connect button add reminder
-    @IBOutlet weak var goalLocation: UITextField!
+    
    
     //communictae with same datastroage of tableview controller
     
     let locationManager = CLLocationManager()
+
     
     //MARK:Properties
     
     @IBOutlet weak var duedate: UIDatePicker!
     @IBOutlet weak var goaldesc: UITextView!
     @IBOutlet weak var goalname: UITextField!
-    
+    @IBOutlet weak var goalLocation: UITextField!
     
     var currentGoal: String = ""
     var currentDesc: String = ""
     var currentDueDate: NSDate? = nil
     var currentLocation: CLPlacemark? = nil
+    var curLocation: String = ""
    // var currentAlertC: UIAlertController? = nil
   
     
@@ -42,12 +44,6 @@ class AddGoalVC: UIViewController, UITextFieldDelegate, UITextViewDelegate, CLLo
         // Handle the text field’s user input through delegate callbacks.
         goalname.delegate = self
     
-        
-        duedate.minimumDate = NSDate()
-        let timeInterval = floor(duedate.minimumDate!.timeIntervalSinceReferenceDate/60.0)*60.0
-        duedate.minimumDate = NSDate(timeIntervalSinceReferenceDate: timeInterval)
-        self.goaldesc.layer.borderWidth = 1.0
-       
         self.locationManager.delegate = self
         self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
         self.locationManager.requestWhenInUseAuthorization()
@@ -62,8 +58,16 @@ class AddGoalVC: UIViewController, UITextFieldDelegate, UITextViewDelegate, CLLo
         if(self.currentGoal != "" || self.currentDueDate != nil) {
             self.goalname.text = self.currentGoal
             self.goaldesc.text = self.currentDesc
-            self.duedate.setDate(currentDueDate!, animated: true)
+            self.duedate.setDate(self.currentDueDate!, animated: true)
+            self.goalLocation.text = self.curLocation
             
+        }
+        else {
+            duedate.minimumDate = NSDate()
+            let timeInterval = floor(duedate.minimumDate!.timeIntervalSinceReferenceDate/60.0)*60.0
+            duedate.minimumDate = NSDate(timeIntervalSinceReferenceDate: timeInterval)
+            self.goaldesc.layer.borderWidth = 1.0
+
         }
         
     }
@@ -94,12 +98,8 @@ class AddGoalVC: UIViewController, UITextFieldDelegate, UITextViewDelegate, CLLo
     
     func displayLocationInfo(placemark: CLPlacemark){
         self.locationManager.stopUpdatingLocation()
-        goalLocation.text = placemark.locality! + ", "  + placemark.administrativeArea! + " " + placemark.postalCode! + " " + placemark.country!
-        
-       /* print(placemark.locality)
-        print(placemark.postalCode)
-        print(placemark.administrativeArea)
-        print(placemark.country) */
+        self.curLocation = placemark.locality! + ", "  + placemark.administrativeArea! + " " + placemark.postalCode! + " " + placemark.country!
+        goalLocation.text = self.curLocation
     }
     
     func locaitonManager(manager: CLLocation!, didFailWithError error: NSError!){
@@ -180,7 +180,7 @@ class AddGoalVC: UIViewController, UITextFieldDelegate, UITextViewDelegate, CLLo
     //MARK: Actions
     @IBAction func addGoal(sender: AnyObject) {
         if(self.currentGoal != "" || self.currentDueDate != nil) {
-            if let x = GoalItem(goal: self.currentGoal, duedate: currentDueDate!, desc: self.currentDesc) {
+            if let x = GoalItem(goal: self.currentGoal, duedate: currentDueDate!, desc: self.currentDesc, location: self.curLocation) {
                 if let i = DataStorage.sharedInstance.goalList.indexOf(x) {
                     DataStorage.sharedInstance.goalList.removeAtIndex(i)
                 }
@@ -193,7 +193,7 @@ class AddGoalVC: UIViewController, UITextFieldDelegate, UITextViewDelegate, CLLo
         let timeInterval = floor(d.timeIntervalSinceReferenceDate/60.0)*60.0
         d = NSDate(timeIntervalSinceReferenceDate: timeInterval)
         
-        let x = GoalItem(goal: goalname.text!,duedate: d, desc: goaldesc.text!)
+        let x = GoalItem(goal: goalname.text!,duedate: d, desc: goaldesc.text!, location: goalLocation.text!)
         DataStorage.sharedInstance.addGoal(x!)
         
         

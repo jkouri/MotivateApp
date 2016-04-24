@@ -17,6 +17,7 @@ class NewHabitVC: UIViewController, UITextFieldDelegate, UITextViewDelegate{
     @IBOutlet weak var habitName: UITextField!
     @IBOutlet weak var habitDay: UILabel!
     
+    //currentTime is the time it should remind at, currentDateMade is the date it was made
     var currentHabit: String = ""
     var currentTime: NSDate? = nil
     var currentDay: Int = 0
@@ -27,9 +28,26 @@ class NewHabitVC: UIViewController, UITextFieldDelegate, UITextViewDelegate{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if(self.habitName != "" || self.habitDay != nil) {
+        
+        if(self.habitName != "") {
+            if let date = self.currentTime{
+                self.habitTime.setDate(date, animated: true)
+            }
             self.habitName.text = self.currentHabit
+         //   self.habitTime.setDate(self.currentTime!, animated: true)
+            let xNSNumber = self.currentDay as NSNumber
+            let xString : String = xNSNumber.stringValue
+            self.habitDay.text = xString + " /21 Days Completed"
             
+            
+            
+        }
+        else {
+            
+            habitTime.minimumDate = NSDate()
+            let timeInterval = floor(habitTime.minimumDate!.timeIntervalSinceReferenceDate/60.0)*60.0
+            habitTime.minimumDate = NSDate(timeIntervalSinceReferenceDate: timeInterval)
+
         }
         
 
