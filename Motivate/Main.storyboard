@@ -416,12 +416,6 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Day " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NPL-Sp-M5X">
-                                <rect key="frame" x="443" y="97" width="74" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="10x-Gs-C9x">
                                 <rect key="frame" x="43" y="134" width="515" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -436,13 +430,21 @@
                                     <!--2016-04-14 03:37:35 +0000-->
                                 </date>
                             </datePicker>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Day " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NPL-Sp-M5X">
+                                <rect key="frame" x="460" y="105" width="74" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="NPL-Sp-M5X" secondAttribute="trailing" constant="46" id="1Nw-kL-xzl"/>
                             <constraint firstItem="10x-Gs-C9x" firstAttribute="leading" secondItem="9wl-79-EPH" secondAttribute="leadingMargin" constant="23" id="21i-bA-ICk"/>
                             <constraint firstAttribute="trailingMargin" secondItem="10x-Gs-C9x" secondAttribute="trailing" constant="22" id="Cwv-nt-cjh"/>
                             <constraint firstItem="10x-Gs-C9x" firstAttribute="top" secondItem="ToT-l7-hsD" secondAttribute="bottom" constant="70" id="E12-Q3-x7G"/>
                             <constraint firstItem="Ska-EH-4vg" firstAttribute="leading" secondItem="9wl-79-EPH" secondAttribute="leadingMargin" constant="81" id="THQ-XH-I4n"/>
+                            <constraint firstItem="NPL-Sp-M5X" firstAttribute="top" secondItem="ToT-l7-hsD" secondAttribute="bottom" constant="3" id="hkb-ch-mk0"/>
                             <constraint firstItem="Ska-EH-4vg" firstAttribute="centerY" secondItem="9wl-79-EPH" secondAttribute="centerY" id="pzH-zt-6hq"/>
                         </constraints>
                     </view>
