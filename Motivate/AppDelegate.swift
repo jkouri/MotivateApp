@@ -15,6 +15,50 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        
+     /*   //Actions
+        let firstAction: UIMutableUserNotificationAction = UIMutableUserNotificationAction()
+        firstAction.identifier = "FIRST_ACTION"
+        firstAction.title = "First Action"
+        
+        firstAction.activationMode = UIUserNotificationActivationMode.Background
+        firstAction.destructive = true
+        firstAction.authenticationRequired = false
+        
+        let secondAction: UIMutableUserNotificationAction = UIMutableUserNotificationAction()
+        secondAction.identifier = "SECOND_ACTION"
+        secondAction.title = "Second Action"
+        
+        secondAction.activationMode = UIUserNotificationActivationMode.Foreground
+        secondAction.destructive = false
+        secondAction.authenticationRequired = false
+        
+        let thirdAction: UIMutableUserNotificationAction = UIMutableUserNotificationAction()
+        thirdAction.identifier = "THIRD_ACTION"
+        thirdAction.title = "Third Action"
+        
+        thirdAction.activationMode = UIUserNotificationActivationMode.Background
+        thirdAction.destructive = false
+        thirdAction.authenticationRequired = false
+        
+        
+        //group actions within a category - set will store different types of categories (diff actions for diff kinds of notificaitons)
+        //category
+        
+        let firstCategory:UIMutableUserNotificationCategory = UIMutableUserNotificationCategory()
+        firstCategory.identifier = "FIRST_CATEGORY"
+        
+        let defaultActions:NSArray = [firstAction, secondAction, thirdAction]
+        let minimalActions:NSArray = [firstAction, secondAction]
+        
+        firstCategory.setActions(defaultActions as! [UIUserNotificationAction], forContext: UIUserNotificationActionContext.Default)
+        firstCategory.setActions(minimalActions as! [UIUserNotificationAction], forContext: UIUserNotificationActionContext.Minimal)
+        
+        //NSSet of all our categories
+        let categories:NSSet = NSSet(objects: firstCategory)
+        
+        let settings = UIUserNotificationSettings(forTypes: [.Alert, .Badge], categories: categories as! Set<UIUserNotificationCategory>)
+        UIApplication.sharedApplication().registerUserNotificationSettings(settings) */
         // Override point for customization after application launch.
         return true
     }

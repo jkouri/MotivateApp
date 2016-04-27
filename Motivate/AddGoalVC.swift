@@ -35,7 +35,8 @@ class AddGoalVC: UIViewController, UITextFieldDelegate, UITextViewDelegate, CLLo
     var currentDueDate: NSDate? = nil
     var currentLocation: CLPlacemark? = nil
     var curLocation: String = ""
-   // var currentAlertC: UIAlertController? = nil
+   // var curAlert: UILocalNotification? = nil
+    var curAlert: UIAlertController? = nil
   
     
     
@@ -54,6 +55,7 @@ class AddGoalVC: UIViewController, UITextFieldDelegate, UITextViewDelegate, CLLo
         self.goaldesc.delegate = self
         self.goaldesc.text = "Make your goal SMART! Specific, Measurable, Attainable, Realistic and Time-Oriented"
         self.goaldesc.textColor = UIColor.lightGrayColor()
+        self.goaldesc.layer.borderWidth = 1.0
         
         if(self.currentGoal != "" || self.currentDueDate != nil) {
             self.goalname.text = self.currentGoal
@@ -66,9 +68,14 @@ class AddGoalVC: UIViewController, UITextFieldDelegate, UITextViewDelegate, CLLo
             duedate.minimumDate = NSDate()
             let timeInterval = floor(duedate.minimumDate!.timeIntervalSinceReferenceDate/60.0)*60.0
             duedate.minimumDate = NSDate(timeIntervalSinceReferenceDate: timeInterval)
-            self.goaldesc.layer.borderWidth = 1.0
-
         }
+        
+      /*  let notification:UILocalNotification = UILocalNotification()
+        notification.category = "FIRST_CATEGORY"
+        notification.alertBody = "Your goal, x, is due!"
+        notification.fireDate = self.currentDueDate*/
+        
+
         
     }
     
@@ -106,17 +113,19 @@ class AddGoalVC: UIViewController, UITextFieldDelegate, UITextViewDelegate, CLLo
         print("Error" + error.localizedDescription)
     }
     
+    
+    
     // MARK: UITextViewDelegate
     
-    /*
-     func countUp(){
-     for reminder in DataStorage.sharedInstance.reminderlist{
-     if Int64(NSDate().timeIntervalSinceDate(reminder.date)) == 0 || Int64(NSDate().timeIntervalSinceDate(reminder.date)) == 1 || Int64(NSDate().timeIntervalSinceDate(reminder.date)) == -1{
-     UIApplication.sharedApplication().keyWindow?.rootViewController!.presentViewController(reminder.alertController, animated: true, completion: nil)
+    
+   /*  func countUp(){
+     for goal in DataStorage.sharedInstance.goalList{
+        if Int64(NSDate().timeIntervalSinceDate(goal.duedate)) == 0 || Int64(NSDate().timeIntervalSinceDate(goal.duedate)) == 1 || Int64(NSDate().timeIntervalSinceDate(goal.duedate)) == -1{
+                UIApplication.sharedApplication().keyWindow?.rootViewController!.presentViewController(goal.alert, animated: true, completion: nil)
+                }
+        }
      }
-     }
-     }
-     */
+    */
     
     
     func textViewDidBeginEditing(textView: UITextView){
@@ -152,17 +161,29 @@ class AddGoalVC: UIViewController, UITextFieldDelegate, UITextViewDelegate, CLLo
             i=i+1
         }
         NSNotificationCenter.defaultCenter().postNotificationName("reload", object: nil)
+      /*  let documentsPath : AnyObject = NSSearchPathForDirectoriesInDomains(.DocumentDirectory,.UserDomainMask,true)[0]
+        let destinationPath:NSString = documentsPath.stringByAppendingString("/goal_list.db")
+        
+        NSKeyedArchiver.archiveRootObject(DataStorage.sharedInstance.goalList, toFile: destinationPath as String)*/
     }
     
     
     func postponeAlert(alert: UIAlertAction, alertController: UIAlertController, x: GoalItem){
         
         dispatch_async(dispatch_get_main_queue(), {
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(3600.00 * Double(NSEC_PER_SEC))), dispatch_get_main_queue())
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(24*3600.00 * Double(NSEC_PER_SEC))), dispatch_get_main_queue())
             {
                 UIApplication.sharedApplication().keyWindow?.rootViewController!.presentViewController(alertController, animated: true, completion: nil)
             }
         })
+        
+        x.duedate = x.duedate.dateByAddingTimeInterval(60*60*24)
+        NSNotificationCenter.defaultCenter().postNotificationName("reload", object: nil)
+        let documentsPath : AnyObject = NSSearchPathForDirectoriesInDomains(.DocumentDirectory,.UserDomainMask,true)[0]
+        let destinationPath:NSString = documentsPath.stringByAppendingString("/goal_list.db")
+        
+        NSKeyedArchiver.archiveRootObject(DataStorage.sharedInstance.goalList, toFile: destinationPath as String)
+
     }
     
     
@@ -180,20 +201,25 @@ class AddGoalVC: UIViewController, UITextFieldDelegate, UITextViewDelegate, CLLo
     //MARK: Actions
     @IBAction func addGoal(sender: AnyObject) {
         if(self.currentGoal != "" || self.currentDueDate != nil) {
-            if let x = GoalItem(goal: self.currentGoal, duedate: currentDueDate!, desc: self.currentDesc, location: self.curLocation) {
+            if let x = GoalItem(goal: self.currentGoal, duedate: currentDueDate!, desc: self.currentDesc, location: self.curLocation, alert: self.curAlert!) {
                 if let i = DataStorage.sharedInstance.goalList.indexOf(x) {
                     DataStorage.sharedInstance.goalList.removeAtIndex(i)
                 }
             }
         }
         
-      /*  let alertController = UIAlertController(title: "Due:", message: goalname.text!, preferredStyle: UIAlertControllerStyle.Alert)
-        */
-        var d = duedate.date
+        let alertController = UIAlertController(title: "Due:", message: goalname.text!, preferredStyle: UIAlertControllerStyle.Alert)
+        
+       var d = duedate.date
         let timeInterval = floor(d.timeIntervalSinceReferenceDate/60.0)*60.0
         d = NSDate(timeIntervalSinceReferenceDate: timeInterval)
+       /* let notification:UILocalNotification = UILocalNotification()
+        notification.category = "FIRST_CATEGORY"
+        notification.alertBody = "Your goal, x, is due!"
+        notification.fireDate = NSDate()*/
         
-        let x = GoalItem(goal: goalname.text!,duedate: d, desc: goaldesc.text!, location: goalLocation.text!)
+        
+        let x = GoalItem(goal: goalname.text!,duedate: d, desc: goaldesc.text!, location: goalLocation.text!, alert: alertController)
         DataStorage.sharedInstance.addGoal(x!)
         
         
@@ -207,17 +233,17 @@ class AddGoalVC: UIViewController, UITextFieldDelegate, UITextViewDelegate, CLLo
         NSUserDefaults.standardUserDefaults().setObject(goal, forKey: "list")
         goalname.text=""
         self.navigationController?.popToRootViewControllerAnimated(true)
-    }
     
-       /* alertController.addAction(UIAlertAction(title: "Dismiss", style: .Cancel, handler: {
+    
+        alertController.addAction(UIAlertAction(title: "Dismiss", style: .Cancel, handler: {
             action in self.dismissAlert(action, x: x!)
         }))
         alertController.addAction(UIAlertAction(title: "Postpone", style: .Default, handler: {
             action in self.postponeAlert(action, alertController: alertController, x: x!)
         }))
         
-        delay(d, alertController: alertController, x: x!) */
-    
+        delay(d, alertController: alertController, x: x!)
+    }
     
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {

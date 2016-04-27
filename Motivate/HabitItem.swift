@@ -18,15 +18,18 @@ class HabitItem: NSObject, NSCoding {
     var time: NSDate
     var day: Int
     var dateMade: NSDate
+    var dailyAlert: UIAlertController
+    
     //var alert: Bool
     
     // MARK: Initialization
     
-    init?(habit: String, time: NSDate, day: Int, dateMade: NSDate) {
+    init?(habit: String, time: NSDate, day: Int, dateMade: NSDate, dailyAlert: UIAlertController) {
         self.habit = habit
         self.time = time
         self.day = day
         self.dateMade = dateMade
+        self.dailyAlert = dailyAlert
         
     }
     
@@ -44,14 +47,16 @@ class HabitItem: NSObject, NSCoding {
     required convenience init?(coder decoder: NSCoder) {
         guard let habit = decoder.decodeObjectForKey("habit") as? String,
             let time = decoder.decodeObjectForKey("time") as? NSDate,
-            let dateMade = decoder.decodeObjectForKey("dateMade") as? NSDate
+            let dateMade = decoder.decodeObjectForKey("dateMade") as? NSDate,
+            let dailyAlert = decoder.decodeObjectForKey("dailyAlert") as? UIAlertController
             else { return nil }
         
         self.init(
             habit: habit,
             time: time,
             day: decoder.decodeIntegerForKey("day"),
-            dateMade: dateMade
+            dateMade: dateMade,
+            dailyAlert: dailyAlert
             )
     }
     
@@ -60,6 +65,7 @@ class HabitItem: NSObject, NSCoding {
         coder.encodeObject(self.time, forKey: "time")
         coder.encodeInt(Int32(self.day), forKey: "day")
         coder.encodeObject(self.dateMade, forKey: "dateMade")
+        coder.encodeObject(self.dailyAlert, forKey: "dailyAlert")
     }
     
         

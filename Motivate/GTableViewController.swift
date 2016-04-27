@@ -32,8 +32,6 @@ class GTableViewController: UITableViewController  {
 
         
     }
-    /*        if NSUserDefaults.standardUserDefaults().objectForKey("list") != nil {
-     reminderlist = NSUserDefaults.standardUserDefaults().objectForKey("list") as! [ReminderItem] */
     
     
     // Uncomment the following line to preserve selection between presentations
@@ -80,6 +78,12 @@ class GTableViewController: UITableViewController  {
             NSUserDefaults.standardUserDefaults().setObject(DataStorage.sharedInstance.goalList, forKey: "list")
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
             tableView.reloadData()
+            
+          /*  let documentsPath : AnyObject = NSSearchPathForDirectoriesInDomains(.DocumentDirectory,.UserDomainMask,true)[0]
+            let destinationPath:NSString = documentsPath.stringByAppendingString("/goal_list.db")
+            
+            NSKeyedArchiver.archiveRootObject(DataStorage.sharedInstance.goalList, toFile: destinationPath as String)*/
+
         }
     }
     
