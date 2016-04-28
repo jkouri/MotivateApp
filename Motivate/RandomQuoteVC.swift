@@ -16,14 +16,11 @@ class RandomQuoteVC: UIViewController, AVAudioPlayerDelegate, AVAudioRecorderDel
     @IBOutlet weak var recordButton: UIButton!
   
     @IBOutlet weak var quoteLabel: UILabel!
-    
-    var soundRecorder: AVAudioRecorder!
-    var soundPlayer: AVAudioPlayer!
 
-   // let fileManager =      NSFileManager.defaultManager().URLsForDirectory(NSSearchPathDirectory.DocumentDirectory, inDomains: NSSearchPathDomainMask.UserDomainMask).first
-  //  var fileName = fileManager!.URLByAppendingPathComponent("audio.m4a")
-    
-    var fileName = "audioFile.m4a"
+    var soundRecorder: AVAudioRecorder!
+    var soundPlayer:AVAudioPlayer!
+
+    let fileName = "audio.m4a"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,7 +30,8 @@ class RandomQuoteVC: UIViewController, AVAudioPlayerDelegate, AVAudioRecorderDel
     
     
     @IBAction func playSound(sender: AnyObject) {
-        if (sender.titleLabel?!.text == "Play"){
+        
+            if (sender.titleLabel?!.text == "Play"){
             recordButton.enabled = false
             sender.setTitle("Stop", forState: .Normal)
             preparePlayer()
@@ -44,6 +42,7 @@ class RandomQuoteVC: UIViewController, AVAudioPlayerDelegate, AVAudioRecorderDel
         }
         
     }
+    
     @IBAction func recordSound(sender: AnyObject) {
         if (sender.titleLabel?!.text == "Record"){
             soundRecorder.record()
@@ -84,6 +83,9 @@ class RandomQuoteVC: UIViewController, AVAudioPlayerDelegate, AVAudioRecorderDel
             soundRecorder.delegate = self
             soundRecorder.prepareToRecord()
         }
+        
+        let session = AVAudioSession.sharedInstance()
+        try!  session.setCategory(AVAudioSessionCategoryPlayAndRecord)
     }
     
     // MARK:- Prepare AVPlayer
@@ -92,6 +94,8 @@ class RandomQuoteVC: UIViewController, AVAudioPlayerDelegate, AVAudioRecorderDel
         var error: NSError?
         
         do {
+            try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
+            try AVAudioSession.sharedInstance().setActive(true)
             soundPlayer = try AVAudioPlayer(contentsOfURL: getFileURL())
         } catch let error1 as NSError {
             error = error1
@@ -109,7 +113,7 @@ class RandomQuoteVC: UIViewController, AVAudioPlayerDelegate, AVAudioRecorderDel
     
     // MARK:- File URL
     
-    func getCacheDirectory() -> String {
+   func getCacheDirectory() -> String {
         
         let paths = NSSearchPathForDirectoriesInDomains(.CachesDirectory,.UserDomainMask, true)
         
@@ -117,13 +121,23 @@ class RandomQuoteVC: UIViewController, AVAudioPlayerDelegate, AVAudioRecorderDel
     }
     
     func getFileURL() -> NSURL {
+      
         
         let path = getCacheDirectory().stringByAppendingString(fileName)
         
         let filePath = NSURL(fileURLWithPath: path)
         
         return filePath
+
     }
+       /* if let fileManager = NSFileManager.defaultManager().URLsForDirectory(NSSearchPathDirectory.DocumentDirectory, inDomains: NSSearchPathDomainMask.UserDomainMask).first {
+            let soundURL = fileManager.URLByAppendingPathComponent("audio.m4a")
+            return soundURL
+        } else {
+            return self.fileName
+        } */
+        
+          
     
     // MARK:- AVAudioPlayer delegate methods
     

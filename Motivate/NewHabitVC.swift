@@ -33,8 +33,8 @@ class NewHabitVC: UIViewController, UITextFieldDelegate, UITextViewDelegate{
         
         habitTime.datePickerMode = UIDatePickerMode.Time
         
-        if(self.habitName != "") {
-            if let date = self.currentTime{
+        if(self.currentHabit != "") {
+            if let date = self.currentTime {
                 self.habitTime.setDate(date, animated: true)
             }
             self.habitName.text = self.currentHabit
@@ -45,15 +45,17 @@ class NewHabitVC: UIViewController, UITextFieldDelegate, UITextViewDelegate{
             
             
             
+        } else {
+            self.habitDay.text = ""
         }
-        else {
+       /* else {
             
-            habitTime.minimumDate = NSDate()
+           /* habitTime.minimumDate = NSDate()
             let timeInterval = floor(habitTime.minimumDate!.timeIntervalSinceReferenceDate/60.0)*60.0
-            habitTime.minimumDate = NSDate(timeIntervalSinceReferenceDate: timeInterval)
+            habitTime.minimumDate = NSDate(timeIntervalSinceReferenceDate: timeInterval)*/
 
         }
-        
+        */
 
     }
 

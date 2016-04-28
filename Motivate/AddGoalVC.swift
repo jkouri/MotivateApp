@@ -16,6 +16,7 @@ var  timer = NSTimer()
 class AddGoalVC: UIViewController, UITextFieldDelegate, UITextViewDelegate, CLLocationManagerDelegate {
     //connect button add reminder
     
+  //  @IBOutlet weak var scrollView: UIScrollView!
     //communictae with same datastroage of tableview controller
     
     let locationManager = CLLocationManager()
@@ -37,12 +38,13 @@ class AddGoalVC: UIViewController, UITextFieldDelegate, UITextViewDelegate, CLLo
     var curAlert: UIAlertController? = nil
   
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
  
         // Handle the text field’s user input through delegate callbacks.
         goalname.delegate = self
+        goalLocation.delegate = self
+        goaldesc.delegate = self
     
         self.locationManager.delegate = self
         self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
@@ -124,20 +126,12 @@ class AddGoalVC: UIViewController, UITextFieldDelegate, UITextViewDelegate, CLLo
     // MARK: UITextViewDelegate
     
     
-   /*  func countUp(){
-     for goal in DataStorage.sharedInstance.goalList{
-        if Int64(NSDate().timeIntervalSinceDate(goal.duedate)) == 0 || Int64(NSDate().timeIntervalSinceDate(goal.duedate)) == 1 || Int64(NSDate().timeIntervalSinceDate(goal.duedate)) == -1{
-                UIApplication.sharedApplication().keyWindow?.rootViewController!.presentViewController(goal.alert, animated: true, completion: nil)
-                }
-        }
-     }
-    */
-    
     
     func textViewDidBeginEditing(textView: UITextView){
         if textView.textColor == UIColor.lightGrayColor(){
             textView.text = nil
             textView.textColor = UIColor.blackColor()
+           // registerForKeyboardNotifications()
         }
     }
     
@@ -145,6 +139,7 @@ class AddGoalVC: UIViewController, UITextFieldDelegate, UITextViewDelegate, CLLo
         if textView.text.isEmpty {
             textView.text = "Make your goal SMART! Specific, Measurable, Attainable, Realistic and Time-Oriented"
             textView.textColor = UIColor.lightGrayColor()
+           // deregisterFromKeyboardNotifications()
         }
     }
     // MARK: UITextFieldDelegate
@@ -244,10 +239,74 @@ class AddGoalVC: UIViewController, UITextFieldDelegate, UITextViewDelegate, CLLo
     }
     
     
+ /*
+    //dealing with scroll view: to handle locaiton text view being hidden by keyboard
+    func registerForKeyboardNotifications()
+    {
+        //Adding notifies on keyboard appearing
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWasShown:", name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillBeHidden:", name: UIKeyboardWillHideNotification, object: nil)
+    }
+    
+    
+    func deregisterFromKeyboardNotifications()
+    {
+        //Removing notifies on keyboard appearing
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillHideNotification, object: nil)
+    }
+    
+    func keyboardWasShown(notification: NSNotification)
+    {
+        //Need to calculate keyboard exact size due to Apple suggestions
+        self.scrollView.scrollEnabled = true
+        var info : NSDictionary = notification.userInfo!
+        var keyboardSize = (info[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue().size
+        var contentInsets : UIEdgeInsets = UIEdgeInsetsMake(0.0, 0.0, keyboardSize!.height, 0.0)
+        
+        self.scrollView.contentInset = contentInsets
+        self.scrollView.scrollIndicatorInsets = contentInsets
+        
+        var aRect : CGRect = self.view.frame
+        aRect.size.height -= keyboardSize!.height
+        if let activeFieldPresent = goalLocation
+        {
+            if (!CGRectContainsPoint(aRect, goalLocation!.frame.origin))
+            {
+                self.scrollView.scrollRectToVisible(goalLocation!.frame, animated: true)
+            }
+        }
+        
+        
+    }
+    
+    
+    func keyboardWillBeHidden(notification: NSNotification)
+    {
+        //Once keyboard disappears, restore original positions
+        var info : NSDictionary = notification.userInfo!
+        var keyboardSize = (info[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue().size
+        var contentInsets : UIEdgeInsets = UIEdgeInsetsMake(0.0, 0.0, -keyboardSize!.height, 0.0)
+        self.scrollView.contentInset = contentInsets
+        self.scrollView.scrollIndicatorInsets = contentInsets
+        self.view.endEditing(true)
+        self.scrollView.scrollEnabled = false
+        
+    }
+    
+    func textFieldDidBeginEditing(textField: UITextField!)
+    {
+        goalLocation = textField
+    }
+    
+    func textFieldDidEndEditing(textField: UITextField!)
+    {
+        goalLocation = nil
+    }
+    */
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         self.view.endEditing(true)
     }
 
-    
 }
 
