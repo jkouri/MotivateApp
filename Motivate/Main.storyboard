@@ -485,7 +485,7 @@
                                 <constraints>
                                     <constraint firstAttribute="width" constant="301" id="R7G-jF-TeL"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="Noteworthy-Bold" family="Noteworthy" pointSize="32"/>
+                                <fontDescription key="fontDescription" name="Noteworthy-Bold" family="Noteworthy" pointSize="14"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8HL-VP-cEr">
@@ -497,39 +497,42 @@
                                     <action selector="generateQuote:" destination="PwX-dR-Ppa" eventType="touchUpInside" id="yfL-vo-mD6"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Record Daily Positive Self Affirmations:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J1g-ub-4Sz">
-                                <rect key="frame" x="20" y="261" width="297" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Record Daily Positive Self Affirmations:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J1g-ub-4Sz">
+                                <rect key="frame" x="28" y="420" width="297" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="297" id="fC8-4A-4kK"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FHT-dd-Wu1">
-                                <rect key="frame" x="103" y="348" width="104" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FHT-dd-Wu1">
+                                <rect key="frame" x="153" y="476" width="104" height="30"/>
                                 <state key="normal" title="Record"/>
                                 <connections>
                                     <action selector="recordSound:" destination="PwX-dR-Ppa" eventType="touchUpInside" id="PUT-n2-X0j"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RA2-m5-6rL">
-                                <rect key="frame" x="330" y="348" width="46" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RA2-m5-6rL">
+                                <rect key="frame" x="378" y="476" width="46" height="30"/>
                                 <state key="normal" title="Play"/>
                                 <connections>
                                     <action selector="playSound:" destination="PwX-dR-Ppa" eventType="touchUpInside" id="sIe-Fr-eQD"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Example: &quot;Only positive thoughts occupy my mind&quot;" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LOB-hN-DHw">
-                                <rect key="frame" x="95" y="284" width="329" height="21"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.73734191600129662" green="0.67425327726581874" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="8HL-VP-cEr" firstAttribute="top" secondItem="fyZ-Cp-zWD" secondAttribute="bottom" constant="35" id="74m-uF-lZs"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="RA2-m5-6rL" secondAttribute="trailing" constant="70" id="Bmm-Ha-ObQ"/>
+                            <constraint firstItem="RA2-m5-6rL" firstAttribute="top" secondItem="J1g-ub-4Sz" secondAttribute="bottom" constant="35" id="G1p-KM-sll"/>
+                            <constraint firstItem="JH1-vm-DIy" firstAttribute="top" secondItem="J1g-ub-4Sz" secondAttribute="bottom" constant="141" id="PE8-MN-SLQ"/>
                             <constraint firstItem="8HL-VP-cEr" firstAttribute="centerX" secondItem="ZRu-FM-s80" secondAttribute="centerX" id="c1k-8a-zvg"/>
                             <constraint firstItem="fyZ-Cp-zWD" firstAttribute="top" secondItem="Zhk-OR-55a" secondAttribute="bottom" constant="71" id="fui-2H-lce"/>
+                            <constraint firstItem="J1g-ub-4Sz" firstAttribute="leading" secondItem="ZRu-FM-s80" secondAttribute="leadingMargin" constant="8" id="hcD-Um-Esj"/>
+                            <constraint firstItem="FHT-dd-Wu1" firstAttribute="leading" secondItem="ZRu-FM-s80" secondAttribute="leadingMargin" constant="70" id="j4t-QY-Vjc"/>
                             <constraint firstItem="fyZ-Cp-zWD" firstAttribute="centerX" secondItem="ZRu-FM-s80" secondAttribute="centerX" id="oIS-Qc-N76"/>
+                            <constraint firstItem="FHT-dd-Wu1" firstAttribute="top" secondItem="J1g-ub-4Sz" secondAttribute="bottom" constant="35" id="p9Q-xR-iyY"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Motivate" image="Idea-64.png" id="dzG-8J-OW7"/>

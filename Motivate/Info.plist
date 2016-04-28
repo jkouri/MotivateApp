@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
+	<string>Please provide location to track your goals.</string>
 	<key>Allow Arbitrary Loads</key>
 	<true/>
 	<key>CFBundleDevelopmentRegion</key>

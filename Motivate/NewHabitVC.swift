@@ -16,6 +16,7 @@ class NewHabitVC: UIViewController, UITextFieldDelegate, UITextViewDelegate{
     @IBOutlet weak var habitTime: UIDatePicker!
     @IBOutlet weak var habitName: UITextField!
     @IBOutlet weak var habitDay: UILabel!
+
     
     //currentTime is the time it should remind at, currentDateMade is the date it was made
     var currentHabit: String = ""
@@ -23,12 +24,14 @@ class NewHabitVC: UIViewController, UITextFieldDelegate, UITextViewDelegate{
     var currentDay: Int = 0
     var currentDateMade: NSDate? = nil
     var currentDailyAlert: UIAlertController? = nil
+    var currentOriginaltime: NSDate? = nil
 
 
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        habitTime.datePickerMode = UIDatePickerMode.Time
         
         if(self.habitName != "") {
             if let date = self.currentTime{
@@ -54,30 +57,39 @@ class NewHabitVC: UIViewController, UITextFieldDelegate, UITextViewDelegate{
 
     }
 
-    func dismissAlert(alert: UIAlertAction, x: HabitItem){
+    func dismissAlert(alert: UIAlertAction, x: String){
+       //unarchiving
         self.dismissViewControllerAnimated(true, completion: nil)
-        for item in DataStorage.sharedInstance.habitList{
-            var i =  0
-            if(item == x){
-                if item.day == 21 {
-                     DataStorage.sharedInstance.habitList.removeAtIndex(i)
-                } else {
-                    item.day = item.day + 1
-                }
-               
-                break
-            }
-            i = i+1
+        let documentsPath : AnyObject = NSSearchPathForDirectoriesInDomains(.DocumentDirectory,.UserDomainMask,true)[0]
+        let destinationPath:NSString = documentsPath.stringByAppendingString("/habit_list.db")
+        
+        let tempList = NSKeyedUnarchiver.unarchiveObjectWithFile(destinationPath as String)
+        
+        if ((tempList) != nil){
+            DataStorage.sharedInstance.habitList = tempList as! [HabitItem]
         }
+        
+        //editing/updating/deleting an item
+        
+        if let habit = DataStorage.sharedInstance.getHabitWithName(x){
+            if (habit.day == 20){
+                DataStorage.sharedInstance.removeHabitWithName(x)
+            } else {
+                habit.day = habit.day + 1
+                habit.origTime = habit.origTime.dateByAddingTimeInterval(60*60*24)
+                habit.time = habit.origTime
+            }
+        }
+    
+        
+        //reloading data and archiving again
         NSNotificationCenter.defaultCenter().postNotificationName("reload", object: nil)
-      /*  let documentsPath : AnyObject = NSSearchPathForDirectoriesInDomains(.DocumentDirectory,.UserDomainMask,true)[0]
-        let destinationPath:NSString = documentsPath.stringByAppendingString("/goal_list.db")
-         
-         NSKeyedArchiver.archiveRootObject(DataStorage.sharedInstance.goalList, toFile: destinationPath as String)*/
+        DataStorage.sharedInstance.storeHabitData()
+        DataStorage.sharedInstance.reloadHabitData()
     }
 
     
-    func postponeAlert(alert: UIAlertAction, alertController: UIAlertController, x: HabitItem){
+    func postponeAlert(alert: UIAlertAction, alertController: UIAlertController, x: String){
         
         dispatch_async(dispatch_get_main_queue(), {
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(3600.00 * Double(NSEC_PER_SEC))), dispatch_get_main_queue())
@@ -86,66 +98,74 @@ class NewHabitVC: UIViewController, UITextFieldDelegate, UITextViewDelegate{
             }
         })
         
-        x.time = x.time.dateByAddingTimeInterval(60*60)
-        NSNotificationCenter.defaultCenter().postNotificationName("reload", object: nil)
-        let documentsPath : AnyObject = NSSearchPathForDirectoriesInDomains(.DocumentDirectory,.UserDomainMask,true)[0]
-        let destinationPath:NSString = documentsPath.stringByAppendingString("/habit_list.db")
-        
-        NSKeyedArchiver.archiveRootObject(DataStorage.sharedInstance.habitList, toFile: destinationPath as String)
+        if let habit = DataStorage.sharedInstance.getHabitWithName(x) {
+            habit.time = habit.time.dateByAddingTimeInterval(60*60)
+            NSNotificationCenter.defaultCenter().postNotificationName("reload", object: nil)
+            DataStorage.sharedInstance.storeHabitData()
+            DataStorage.sharedInstance.reloadHabitData()
+        }
         
     }
     
     
-    func delay(date: NSDate, alertController: UIAlertController, x: HabitItem){
+    func delay(date: NSDate, name:String){
+        print(date.timeIntervalSinceDate(NSDate()))
         dispatch_async(dispatch_get_main_queue(), {
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(Double(date.timeIntervalSinceDate(NSDate()))*Double(NSEC_PER_SEC))), dispatch_get_main_queue())
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(date.timeIntervalSinceDate(NSDate())*Double(NSEC_PER_SEC))), dispatch_get_main_queue())
             {
-                UIApplication.sharedApplication().keyWindow?.rootViewController!.presentViewController(alertController, animated: true, completion: nil)
+              //  print("FUTURE BLOCK EXECUTED")
+                if let habit = DataStorage.sharedInstance.getHabitWithName(name) {
+                    if habit.time.compare(date) == .OrderedSame{
+                        let alertController = UIAlertController(title: "Due:", message: habit.habit, preferredStyle: UIAlertControllerStyle.Alert)
+                        alertController.addAction(UIAlertAction(title: "Completed", style: .Cancel, handler: {
+                            action in self.dismissAlert(action, x: habit.habit)
+                        }))
+                        alertController.addAction(UIAlertAction(title: "Postpone", style: .Default, handler: {
+                            action in self.postponeAlert(action, alertController: alertController, x: habit.habit)
+                        }))
+                        UIApplication.sharedApplication().keyWindow?.rootViewController!.presentViewController(alertController, animated: true, completion: nil)
+                    }
+                }
+                
             }
         })
-        
     }
 
-    
-    
    
     @IBAction func addHabit(sender: AnyObject) {
-        if(self.currentHabit != "") {
-            if let x = HabitItem(habit: self.currentHabit, time: self.currentTime!, day: self.currentDay, dateMade: self.currentDateMade!, dailyAlert: self.currentDailyAlert!) {
-                if let i = DataStorage.sharedInstance.habitList.indexOf(x) {
-                    DataStorage.sharedInstance.habitList.removeAtIndex(i)
-                }
+       
+       if let habit = DataStorage.sharedInstance.getHabitWithName(self.currentHabit){
+        print(habit.habit)
+        if habit.time.compare(habitTime.date) != .OrderedSame {
+            // print(habit.time.timeIntervalSince1970)
+            // print(habitTime.date.timeIntervalSince1970)
+            habit.time = habitTime.date
+            delay(habit.time, name: habit.habit)
+        }
+        if let name = habitName.text{
+            if habit.habit != name{
+                habit.habit = name
+                delay(habit.time, name:habit.habit)
             }
         }
         
-        let alertController = UIAlertController(title: "Due:", message: habitName.text!, preferredStyle: UIAlertControllerStyle.Alert)
-
+        DataStorage.sharedInstance.storeHabitData()
+        DataStorage.sharedInstance.reloadHabitData()
         
-        var d = habitTime.date
-        let timeInterval = floor(d.timeIntervalSinceReferenceDate/60.0)*60.0
-        d = NSDate(timeIntervalSinceReferenceDate: timeInterval)
-       
-        let x = HabitItem(habit: habitName.text!, time: d, day: 0, dateMade: NSDate(), dailyAlert: alertController)
-        DataStorage.sharedInstance.addHabit(x!)
+        }else{
+            var d = habitTime.date
+            let timeInterval = floor(d.timeIntervalSinceReferenceDate/60.0)*60.0
+            d = NSDate(timeIntervalSinceReferenceDate: timeInterval)
         
+            let x = HabitItem(habit: habitName.text!, time: d, origTime: d, day: 0, dateMade: NSDate())
+            DataStorage.sharedInstance.addHabit(x!)
         
-        let documentsPath : AnyObject = NSSearchPathForDirectoriesInDomains(.DocumentDirectory,.UserDomainMask,true)[0]
-        let destinationPath:NSString = documentsPath.stringByAppendingString("/habit_list.db")
+            NSUserDefaults.standardUserDefaults().setObject(habit, forKey: "list")
+            habitName.text=""
         
-        NSKeyedArchiver.archiveRootObject(DataStorage.sharedInstance.habitList, toFile: destinationPath as String)
-        
-        NSUserDefaults.standardUserDefaults().setObject(habit, forKey: "list")
-        habitName.text=""
+            delay(d, name: x!.habit)
+        }
         self.navigationController?.popToRootViewControllerAnimated(true)
-        
-        alertController.addAction(UIAlertAction(title: "Completed", style: .Cancel, handler: {
-            action in self.dismissAlert(action, x: x!)
-        }))
-        alertController.addAction(UIAlertAction(title: "Postpone", style: .Default, handler: {
-            action in self.postponeAlert(action, alertController: alertController, x: x!)
-        }))
-        
-        delay(d, alertController: alertController, x: x!)
 
     }
     

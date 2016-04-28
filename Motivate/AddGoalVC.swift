@@ -100,7 +100,10 @@ class AddGoalVC: UIViewController, UITextFieldDelegate, UITextViewDelegate, CLLo
     }
     
     @IBAction func useCurrentLocation(sender: AnyObject) {
-        displayLocationInfo(self.currentLocation!)
+        if let location = self.currentLocation{
+             displayLocationInfo(location)
+        }
+       
     }
     
     func displayLocationInfo(placemark: CLPlacemark){
@@ -150,25 +153,18 @@ class AddGoalVC: UIViewController, UITextFieldDelegate, UITextViewDelegate, CLLo
     }
     
     
-    func dismissAlert(alert: UIAlertAction, x: GoalItem){
+    func dismissAlert(alert: UIAlertAction, x: String){
         self.dismissViewControllerAnimated(true, completion: nil)
-        var i = 0
-        for item in DataStorage.sharedInstance.goalList{
-            if(item == x){
-                DataStorage.sharedInstance.goalList.removeAtIndex(i)
-                break
-            }
-            i=i+1
-        }
-        NSNotificationCenter.defaultCenter().postNotificationName("reload", object: nil)
-      /*  let documentsPath : AnyObject = NSSearchPathForDirectoriesInDomains(.DocumentDirectory,.UserDomainMask,true)[0]
-        let destinationPath:NSString = documentsPath.stringByAppendingString("/goal_list.db")
+        DataStorage.sharedInstance.removeGoalWithName(x)
         
-        NSKeyedArchiver.archiveRootObject(DataStorage.sharedInstance.goalList, toFile: destinationPath as String)*/
+        DataStorage.sharedInstance.storeGoalData()
+        DataStorage.sharedInstance.reloadGoalData()
+        NSNotificationCenter.defaultCenter().postNotificationName("reload", object: nil)
+    
     }
     
     
-    func postponeAlert(alert: UIAlertAction, alertController: UIAlertController, x: GoalItem){
+    func postponeAlert(alert: UIAlertAction, alertController: UIAlertController, x: String){
         
         dispatch_async(dispatch_get_main_queue(), {
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(24*3600.00 * Double(NSEC_PER_SEC))), dispatch_get_main_queue())
@@ -177,72 +173,71 @@ class AddGoalVC: UIViewController, UITextFieldDelegate, UITextViewDelegate, CLLo
             }
         })
         
-        x.duedate = x.duedate.dateByAddingTimeInterval(60*60*24)
-        NSNotificationCenter.defaultCenter().postNotificationName("reload", object: nil)
-        let documentsPath : AnyObject = NSSearchPathForDirectoriesInDomains(.DocumentDirectory,.UserDomainMask,true)[0]
-        let destinationPath:NSString = documentsPath.stringByAppendingString("/goal_list.db")
-        
-        NSKeyedArchiver.archiveRootObject(DataStorage.sharedInstance.goalList, toFile: destinationPath as String)
-
+        if let goal = DataStorage.sharedInstance.getGoalWithName(x){
+            goal.duedate = goal.duedate.dateByAddingTimeInterval(60*60*24)
+            NSNotificationCenter.defaultCenter().postNotificationName("reload", object: nil)
+            DataStorage.sharedInstance.storeGoalData()
+            DataStorage.sharedInstance.reloadGoalData()
+        }
     }
     
     
-    func delay(date: NSDate, alertController: UIAlertController, x: GoalItem){
+    func delay(date: NSDate, name: String){
         dispatch_async(dispatch_get_main_queue(), {
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(Double(date.timeIntervalSinceDate(NSDate()))*Double(NSEC_PER_SEC))), dispatch_get_main_queue())
             {
-                UIApplication.sharedApplication().keyWindow?.rootViewController!.presentViewController(alertController, animated: true, completion: nil)
+              //  print("FUTURE BLOCK EXECUTED")
+                if let goal = DataStorage.sharedInstance.getGoalWithName(name) {
+                    if goal.duedate.compare(date) == .OrderedSame{
+                        let alertController = UIAlertController(title: "Due:", message: goal.goal, preferredStyle: UIAlertControllerStyle.Alert)
+                        alertController.addAction(UIAlertAction(title: "Completed", style: .Cancel, handler: {
+                            action in self.dismissAlert(action, x: goal.goal)
+                        }))
+                        alertController.addAction(UIAlertAction(title: "Postpone", style: .Default, handler: {
+                            action in self.postponeAlert(action, alertController: alertController, x: goal.goal)
+                        }))
+                        UIApplication.sharedApplication().keyWindow?.rootViewController!.presentViewController(alertController, animated: true, completion: nil)
+                    }
+                }
+                
             }
         })
-        
     }
-    
-    
+
     //MARK: Actions
     @IBAction func addGoal(sender: AnyObject) {
-        if(self.currentGoal != "" || self.currentDueDate != nil) {
-            if let x = GoalItem(goal: self.currentGoal, duedate: currentDueDate!, desc: self.currentDesc, location: self.curLocation, alert: self.curAlert!) {
-                if let i = DataStorage.sharedInstance.goalList.indexOf(x) {
-                    DataStorage.sharedInstance.goalList.removeAtIndex(i)
+        if let goal = DataStorage.sharedInstance.getGoalWithName(self.currentGoal){
+            //print(goal.goal)
+            if goal.duedate.compare(duedate.date) != .OrderedSame {
+                goal.duedate = duedate.date
+                delay(goal.duedate, name: goal.goal)
+            }
+            if let name = goalname.text{
+                if goal.goal != name{
+                    goal.goal = name
+                    delay(goal.duedate, name:goal.goal)
                 }
             }
-        }
+            
+            DataStorage.sharedInstance.storeGoalData()
+            DataStorage.sharedInstance.reloadGoalData()
+            
+        }else{
         
-        let alertController = UIAlertController(title: "Due:", message: goalname.text!, preferredStyle: UIAlertControllerStyle.Alert)
-        
-       var d = duedate.date
+              var d = duedate.date
         let timeInterval = floor(d.timeIntervalSinceReferenceDate/60.0)*60.0
         d = NSDate(timeIntervalSinceReferenceDate: timeInterval)
-       /* let notification:UILocalNotification = UILocalNotification()
-        notification.category = "FIRST_CATEGORY"
-        notification.alertBody = "Your goal, x, is due!"
-        notification.fireDate = NSDate()*/
-        
-        
-        let x = GoalItem(goal: goalname.text!,duedate: d, desc: goaldesc.text!, location: goalLocation.text!, alert: alertController)
+            
+        let x = GoalItem(goal: goalname.text!,duedate: d, desc: goaldesc.text!, location: goalLocation.text!)
         DataStorage.sharedInstance.addGoal(x!)
-        
-        
-        
-        let documentsPath : AnyObject = NSSearchPathForDirectoriesInDomains(.DocumentDirectory,.UserDomainMask,true)[0]
-        let destinationPath:NSString = documentsPath.stringByAppendingString("/goal_list.db")
-        
-        NSKeyedArchiver.archiveRootObject(DataStorage.sharedInstance.goalList, toFile: destinationPath as String)
-
         
         NSUserDefaults.standardUserDefaults().setObject(goal, forKey: "list")
         goalname.text=""
-        self.navigationController?.popToRootViewControllerAnimated(true)
     
-    
-        alertController.addAction(UIAlertAction(title: "Dismiss", style: .Cancel, handler: {
-            action in self.dismissAlert(action, x: x!)
-        }))
-        alertController.addAction(UIAlertAction(title: "Postpone", style: .Default, handler: {
-            action in self.postponeAlert(action, alertController: alertController, x: x!)
-        }))
+        delay(d, name: x!.goal)
+        }
         
-        delay(d, alertController: alertController, x: x!)
+        self.navigationController?.popToRootViewControllerAnimated(true)
     }
     
     

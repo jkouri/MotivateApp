@@ -20,15 +20,7 @@ class HTableVC: UITableViewController {
         self.tableView.delegate = self
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "reloadTableData:", name: "reload", object: nil)
     
-        let documentsPath : AnyObject = NSSearchPathForDirectoriesInDomains(.DocumentDirectory,.UserDomainMask,true)[0]
-        let destinationPath:NSString = documentsPath.stringByAppendingString("/habit_list.db")
-        
-        let tempList = NSKeyedUnarchiver.unarchiveObjectWithFile(destinationPath as String)
-        
-        if ((tempList) != nil){
-            DataStorage.sharedInstance.habitList = tempList as! [HabitItem]
-        }
-
+        DataStorage.sharedInstance.reloadHabitData()
     }
     
     /*        if NSUserDefaults.standardUserDefaults().objectForKey("list") != nil {
@@ -76,18 +68,18 @@ class HTableVC: UITableViewController {
         //let dateFormatter = NSDateFormatter()
        // dateFormatter.dateFormat = "yyyy-MM-dd"
        // let startDate:NSDate = dateFormatter.dateFromString(start)!
-        let startDate:NSDate = list[indexPath.row].dateMade
-        let endDate: NSDate = NSDate()
+       // let startDate:NSDate = list[indexPath.row].dateMade
+        //let endDate: NSDate = NSDate()
         //let daysToAdd:Double = 21;
         //let endDate:NSDate = startDate.dateByAddingTimeInterval(60*60*24*daysToAdd)
         
-        let cal = NSCalendar.currentCalendar()
+       /* let cal = NSCalendar.currentCalendar()
         
         let components = cal.components(NSCalendarUnit.Day, fromDate: startDate, toDate: endDate, options: [])
         
         print(components)
         
-        list[indexPath.row].day = components.day
+        list[indexPath.row].day = components.day*/
         let x = list[indexPath.row].day
         let string = String(x)
         cell.detailTextLabel?.text = string
@@ -158,6 +150,9 @@ class HTableVC: UITableViewController {
             destVC.currentHabit = (currentHabit?.habit)!
             destVC.currentTime = currentHabit!.time
             destVC.currentDay = (currentHabit?.day)!
+            destVC.currentDateMade = (currentHabit?.dateMade)
+           // destVC.currentDailyAlert = (currentHabit?.dailyAlert)
+            destVC.currentOriginaltime = (currentHabit?.origTime)
             //  destVC.currentAlertC = (curr?.alertController)
         }
     }

@@ -20,16 +20,8 @@ class GTableViewController: UITableViewController  {
         self.tableView.delegate = self
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "reloadTableData:", name: "reload", object: nil)
         
-        let documentsPath : AnyObject = NSSearchPathForDirectoriesInDomains(.DocumentDirectory,.UserDomainMask,true)[0]
-        let destinationPath:NSString = documentsPath.stringByAppendingString("/goal_list.db")
-        
-        let tempList = NSKeyedUnarchiver.unarchiveObjectWithFile(destinationPath as String)
-        
-        if ((tempList) != nil){
-            DataStorage.sharedInstance.goalList = tempList as! [GoalItem]
-        }
-        
-
+                
+        DataStorage.sharedInstance.reloadGoalData()
         
     }
     

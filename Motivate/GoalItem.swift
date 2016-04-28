@@ -19,18 +19,18 @@ class GoalItem: NSObject, NSCoding {
     var desc: String
     var location: String
     //var alert: UILocalNotification
-    var alert: UIAlertController
+   // var alert: UIAlertController
 
     //var alert: Bool
     
     // MARK: Initialization
     
-    init?(goal: String, duedate: NSDate, desc: String, location: String, alert: UIAlertController) {
+    init?(goal: String, duedate: NSDate, desc: String, location: String) {
         self.goal = goal
         self.duedate = duedate
         self.desc = desc
         self.location = location
-        self.alert = alert
+       // self.alert = alert
         
         
     }
@@ -49,16 +49,16 @@ class GoalItem: NSObject, NSCoding {
         guard let goal = decoder.decodeObjectForKey("goal") as? String,
             let duedate = decoder.decodeObjectForKey("duedate") as? NSDate,
             let desc = decoder.decodeObjectForKey("desc") as? String,
-            let location = decoder.decodeObjectForKey("location") as? String,
-            let alert = decoder.decodeObjectForKey("alert") as? UIAlertController
+            let location = decoder.decodeObjectForKey("location") as? String
+           // let alert = decoder.decodeObjectForKey("alert") as? UIAlertController
             else { return nil }
         
         self.init(
             goal: goal,
             duedate: duedate,
             desc: desc,
-            location: location,
-            alert: alert
+            location: location
+          //  alert: alert
         )
     }
     
@@ -67,7 +67,7 @@ class GoalItem: NSObject, NSCoding {
         coder.encodeObject(self.duedate, forKey: "duedate")
         coder.encodeObject(self.desc, forKey: "desc")
         coder.encodeObject(self.location, forKey: "location")
-        coder.encodeObject(self.alert, forKey: "alert")
+      //  coder.encodeObject(self.alert, forKey: "alert")
     }
     
     
