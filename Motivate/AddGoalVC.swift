@@ -13,11 +13,9 @@ var goal = [GoalItem]()
 var now = NSDate()
 var  timer = NSTimer()
 
-
 class AddGoalVC: UIViewController, UITextFieldDelegate, UITextViewDelegate, CLLocationManagerDelegate {
     //connect button add reminder
     
-   
     //communictae with same datastroage of tableview controller
     
     let locationManager = CLLocationManager()
@@ -42,6 +40,7 @@ class AddGoalVC: UIViewController, UITextFieldDelegate, UITextViewDelegate, CLLo
     
     override func viewDidLoad() {
         super.viewDidLoad()
+ 
         // Handle the text field’s user input through delegate callbacks.
         goalname.delegate = self
     
@@ -108,8 +107,12 @@ class AddGoalVC: UIViewController, UITextFieldDelegate, UITextViewDelegate, CLLo
     
     func displayLocationInfo(placemark: CLPlacemark){
         self.locationManager.stopUpdatingLocation()
-        self.curLocation = placemark.locality! + ", "  + placemark.administrativeArea! + " " + placemark.postalCode! + " " + placemark.country!
+        self.curLocation = placemark.subThoroughfare! + " " + placemark.thoroughfare!
+            + " " + placemark.locality! + ", "  + placemark.administrativeArea! + " " + placemark.postalCode!
         goalLocation.text = self.curLocation
+       // print(placemark.name)
+        //print(placemark.subLocality)
+        //print(placemark.location)
     }
     
     func locaitonManager(manager: CLLocation!, didFailWithError error: NSError!){
@@ -244,6 +247,7 @@ class AddGoalVC: UIViewController, UITextFieldDelegate, UITextViewDelegate, CLLo
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         self.view.endEditing(true)
     }
+
     
 }
 

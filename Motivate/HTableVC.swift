@@ -91,7 +91,9 @@ class HTableVC: UITableViewController {
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath){
         if editingStyle == UITableViewCellEditingStyle.Delete {
             DataStorage.sharedInstance.habitList.removeAtIndex(indexPath.row)
-            NSUserDefaults.standardUserDefaults().setObject(DataStorage.sharedInstance.habitList, forKey: "list")
+       //     NSUserDefaults.standardUserDefaults().setObject(DataStorage.sharedInstance.habitList, forKey: "list")
+            DataStorage.sharedInstance.storeHabitData()
+            DataStorage.sharedInstance.reloadHabitData()
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
             tableView.reloadData()
         }

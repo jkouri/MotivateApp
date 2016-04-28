@@ -523,16 +523,20 @@
                         </subviews>
                         <color key="backgroundColor" red="0.73734191600129662" green="0.67425327726581874" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="8HL-VP-cEr" firstAttribute="centerX" secondItem="ZRu-FM-s80" secondAttribute="centerX" id="6nJ-Pz-U4W"/>
                             <constraint firstItem="8HL-VP-cEr" firstAttribute="top" secondItem="fyZ-Cp-zWD" secondAttribute="bottom" constant="35" id="74m-uF-lZs"/>
+                            <constraint firstItem="fyZ-Cp-zWD" firstAttribute="centerX" secondItem="ZRu-FM-s80" secondAttribute="centerX" id="A2Q-Ao-BHF"/>
                             <constraint firstAttribute="trailingMargin" secondItem="RA2-m5-6rL" secondAttribute="trailing" constant="70" id="Bmm-Ha-ObQ"/>
                             <constraint firstItem="RA2-m5-6rL" firstAttribute="top" secondItem="J1g-ub-4Sz" secondAttribute="bottom" constant="35" id="G1p-KM-sll"/>
-                            <constraint firstItem="JH1-vm-DIy" firstAttribute="top" secondItem="J1g-ub-4Sz" secondAttribute="bottom" constant="141" id="PE8-MN-SLQ"/>
+                            <constraint firstItem="J1g-ub-4Sz" firstAttribute="top" secondItem="8HL-VP-cEr" secondAttribute="bottom" constant="213" id="IO7-Nz-42f"/>
+                            <constraint firstItem="8HL-VP-cEr" firstAttribute="centerX" secondItem="ZRu-FM-s80" secondAttribute="centerX" id="Ift-uy-fVr"/>
                             <constraint firstItem="8HL-VP-cEr" firstAttribute="centerX" secondItem="ZRu-FM-s80" secondAttribute="centerX" id="c1k-8a-zvg"/>
                             <constraint firstItem="fyZ-Cp-zWD" firstAttribute="top" secondItem="Zhk-OR-55a" secondAttribute="bottom" constant="71" id="fui-2H-lce"/>
                             <constraint firstItem="J1g-ub-4Sz" firstAttribute="leading" secondItem="ZRu-FM-s80" secondAttribute="leadingMargin" constant="8" id="hcD-Um-Esj"/>
                             <constraint firstItem="FHT-dd-Wu1" firstAttribute="leading" secondItem="ZRu-FM-s80" secondAttribute="leadingMargin" constant="70" id="j4t-QY-Vjc"/>
                             <constraint firstItem="fyZ-Cp-zWD" firstAttribute="centerX" secondItem="ZRu-FM-s80" secondAttribute="centerX" id="oIS-Qc-N76"/>
                             <constraint firstItem="FHT-dd-Wu1" firstAttribute="top" secondItem="J1g-ub-4Sz" secondAttribute="bottom" constant="35" id="p9Q-xR-iyY"/>
+                            <constraint firstItem="fyZ-Cp-zWD" firstAttribute="centerX" secondItem="ZRu-FM-s80" secondAttribute="centerX" id="uza-Mn-cIz"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Motivate" image="Idea-64.png" id="dzG-8J-OW7"/>

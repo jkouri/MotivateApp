@@ -20,6 +20,9 @@ class RandomQuoteVC: UIViewController, AVAudioPlayerDelegate, AVAudioRecorderDel
     var soundRecorder: AVAudioRecorder!
     var soundPlayer: AVAudioPlayer!
 
+   // let fileManager =      NSFileManager.defaultManager().URLsForDirectory(NSSearchPathDirectory.DocumentDirectory, inDomains: NSSearchPathDomainMask.UserDomainMask).first
+  //  var fileName = fileManager!.URLByAppendingPathComponent("audio.m4a")
+    
     var fileName = "audioFile.m4a"
     
     override func viewDidLoad() {
@@ -194,13 +197,9 @@ class RandomQuoteVC: UIViewController, AVAudioPlayerDelegate, AVAudioRecorderDel
             
         })
         task.resume()
-
-       
         
     }
     
-    
-
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

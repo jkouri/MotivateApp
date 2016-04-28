@@ -64,10 +64,13 @@ class GTableViewController: UITableViewController  {
     }
     
     
+   
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath){
         if editingStyle == UITableViewCellEditingStyle.Delete {
             DataStorage.sharedInstance.goalList.removeAtIndex(indexPath.row)
-            NSUserDefaults.standardUserDefaults().setObject(DataStorage.sharedInstance.goalList, forKey: "list")
+           // NSUserDefaults.standardUserDefaults().setObject(DataStorage.sharedInstance.goalList, forKey: "list")
+            DataStorage.sharedInstance.storeGoalData()
+            DataStorage.sharedInstance.reloadGoalData()
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
             tableView.reloadData()
             
