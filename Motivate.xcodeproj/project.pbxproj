@@ -27,7 +27,7 @@
 		4FF89AF31CCFD6B7002155C7 /* goalIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 4FF89AF21CCFD6B7002155C7 /* goalIcon.png */; };
 		4FF89AF51CCFD6D7002155C7 /* habitIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 4FF89AF41CCFD6D7002155C7 /* habitIcon.png */; };
 		4FF89AF71CCFD7C3002155C7 /* Idea-64.png in Resources */ = {isa = PBXBuildFile; fileRef = 4FF89AF61CCFD7C3002155C7 /* Idea-64.png */; };
-		4FF89AF91CCFD820002155C7 /* Good Decision-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 4FF89AF81CCFD820002155C7 /* Good Decision-50.png */; };
+		4FF89AFB1CD38BBD002155C7 /* Good Decision-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 4FF89AFA1CD38BBD002155C7 /* Good Decision-50.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,7 +65,7 @@
 		4FF89AF21CCFD6B7002155C7 /* goalIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = goalIcon.png; sourceTree = "<group>"; };
 		4FF89AF41CCFD6D7002155C7 /* habitIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = habitIcon.png; sourceTree = "<group>"; };
 		4FF89AF61CCFD7C3002155C7 /* Idea-64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Idea-64.png"; sourceTree = "<group>"; };
-		4FF89AF81CCFD820002155C7 /* Good Decision-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Good Decision-50.png"; sourceTree = "<group>"; };
+		4FF89AFA1CD38BBD002155C7 /* Good Decision-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Good Decision-50.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,10 +112,10 @@
 				4F4F18601CB1F997000423E1 /* Assets.xcassets */,
 				4F4F18791CB1F9BD000423E1 /* Main.storyboard */,
 				4FF89AF61CCFD7C3002155C7 /* Idea-64.png */,
+				4FF89AFA1CD38BBD002155C7 /* Good Decision-50.png */,
 				4F4034EA1CBF3F5C0014AB48 /* NewHabitVC.swift */,
 				4F4034EC1CBF46CF0014AB48 /* HabitItem.swift */,
 				4F4F18621CB1F997000423E1 /* LaunchScreen.storyboard */,
-				4FF89AF81CCFD820002155C7 /* Good Decision-50.png */,
 				4F4F187B1CB1F9F0000423E1 /* HomeVC.swift */,
 				4FF89AF41CCFD6D7002155C7 /* habitIcon.png */,
 				4F4F187D1CB1FA00000423E1 /* SignUpVC.swift */,
@@ -226,7 +226,7 @@
 			files = (
 				4FF89AF71CCFD7C3002155C7 /* Idea-64.png in Resources */,
 				4F4F18641CB1F997000423E1 /* LaunchScreen.storyboard in Resources */,
-				4FF89AF91CCFD820002155C7 /* Good Decision-50.png in Resources */,
+				4FF89AFB1CD38BBD002155C7 /* Good Decision-50.png in Resources */,
 				4F4F18611CB1F997000423E1 /* Assets.xcassets in Resources */,
 				4F4F187A1CB1F9BD000423E1 /* Main.storyboard in Resources */,
 				4FF89AF31CCFD6B7002155C7 /* goalIcon.png in Resources */,
